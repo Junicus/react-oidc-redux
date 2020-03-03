@@ -1,0 +1,25 @@
+{
+  "name": "react-oidc-redux",
+  "version": "0.0.1",
+  "description": "React library that supports authentication against OpenID Connect servers using oidc-client and Redux",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "jest --config jestconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Junicus/react-oidc-redux.git"
+  },
+  "keywords": [
+    "React",
+    "oidc",
+    "oidc-client",
+    "Redux"
+  ],
+  "author": "Nelson Segarra <junicus@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Junicus/react-oidc-redux/issues"
+  },
+  "homepage": "https://github.com/Junicus/react-oidc-redux#readme"
+}
