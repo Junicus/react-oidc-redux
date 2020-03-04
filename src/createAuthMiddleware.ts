@@ -26,6 +26,7 @@ export const createAuthMiddleware = (settings: UserManagerSettings, usePopup: bo
           return next(action);
         case AuthActionTypes.SIGNOUT_COMPLETE:
           signOutComplete(action.payload.url)(dispatch);
+          return next(action);
         default:
           return next(action);
       }
@@ -44,7 +45,7 @@ function signIn(state: any, usePopup: boolean) {
         },
       });
     } catch (silentError) {
-      console.log('Silent authentication error: ', silentError);
+      console.error('Silent authentication error: ', silentError);
 
       try {
         if (!usePopup) {
@@ -67,13 +68,13 @@ function signIn(state: any, usePopup: boolean) {
             },
           });
         } else if (usePopup) {
-          console.log('Popup authentication error: ', popupError);
+          console.error('Popup authentication error: ', popupError);
         }
 
         try {
           await userManager.signinRedirect(createArguments(state));
         } catch (redirectError) {
-          console.log('Redirect authentication error: ', redirectError);
+          console.error('Redirect authentication error: ', redirectError);
           dispatch({
             type: AuthActionTypes.SIGNIN_FAILED,
             payload: {
@@ -97,7 +98,7 @@ function signInComplete(url: string) {
         },
       });
     } catch (error) {
-      console.log('There was an error signing in: ', error);
+      console.error('There was an error signing in: ', error);
       dispatch({
         type: AuthActionTypes.SIGNIN_FAILED,
         payload: {
@@ -117,11 +118,11 @@ function signOut(state: any, usePopup: boolean) {
       await userManager.signoutPopup(createArguments());
       dispatch({ type: AuthActionTypes.SIGNOUT_SUCCESS });
     } catch (popupError) {
-      console.log('Popup signout error: ', popupError);
+      console.error('Popup signout error: ', popupError);
       try {
         await userManager.signoutRedirect(createArguments(state));
       } catch (redirectError) {
-        console.log('Redirect signout error: ', redirectError);
+        console.error('Redirect signout error: ', redirectError);
         dispatch({
           type: AuthActionTypes.SIGNOUT_FAILED,
           payload: {
@@ -141,7 +142,7 @@ function signOutComplete(url: string) {
         type: AuthActionTypes.SIGNOUT_SUCCESS,
       });
     } catch (error) {
-      console.log('There was an error signing out: ', error);
+      console.error('There was an error signing out: ', error);
       dispatch({
         type: AuthActionTypes.SIGNIN_FAILED,
         payload: {

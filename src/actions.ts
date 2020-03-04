@@ -1,5 +1,5 @@
 import { AuthActionTypes, SignInAction, SignInCompleteAction, SignOutCompleteAction, SignOutAction } from './types';
-import { ActionCreator, Action } from 'redux';
+import { ActionCreator } from 'redux';
 
 export const login: ActionCreator<SignInAction> = (state: any) => ({
   type: AuthActionTypes.SIGNIN,
